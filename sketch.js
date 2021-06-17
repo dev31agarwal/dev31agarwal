@@ -12,6 +12,7 @@ var score =0;
 var start=0, end=1
 var turn=0;
 var gameState= 1;
+var state=0;
 
 function setup() {
   createCanvas(800, 800);
@@ -62,7 +63,9 @@ function draw() {
  text("Score : "+score,20,30);
 
 
-
+if(turn===5){
+  state=1;
+}
 
  text("X: "+ mouseX +" Y: "+ mouseY, mouseX, mouseY );
 
@@ -79,7 +82,7 @@ function draw() {
  text("400", 740, 530);
 
   Engine.update(engine);
-
+if(state===0){
   if(particle!==undefined){
     
     if(particle.position.y>480&&gameState===2){
@@ -127,7 +130,7 @@ function draw() {
       gameState=1
     }
   }
- 
+} 
   
    for (var i = 0; i < plinkos.length; i++) {
      plinkos[i].display();
@@ -150,12 +153,13 @@ function mousePressed(){
 
  
 
-  
+  turn=turn+1;
 
    // particles.push (new Particle(mouseX, 30, 10, 10));
    
 gameState=2;
+  if(state===0){
   particle = Bodies.circle(mouseX, 0, 10);       
    World.add(world, particle);
-  
+  }
 }
